@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>admin_detail</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/detail.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div>
+			<div class="head">
+				<div th:replace="./inc/adminHeader"></div>
+			</div>
+			<br/><br/>
+			
+			<div class="container">
+				<form role="form" th:object=${reservationVO} th:action="@{/admin}" method="post">
+					<table>
+						<tbody>
+							<tr>
+								<th><label>강의실</label></th>
+								<td class="writerWidth"><p th:text="'뉴턴홀 ' + ${detail.room_name} + '호'"></p></td>
+								<th><label>예약자</label></th>
+								<td class="writerWidth"><p th:text="${user.name}"></p></td>
+							</tr>
+							<tr>
+								<th><label>예약자 전공</label></th>
+								<td class="writerWidth"><p th:text="${detail.majorName}"></p></td>
+								<th><label>예약자 email</label></th>
+								<td class="dateWidth"><p th:text="${user.email}"></p></td>
+							</tr>
+							<tr>
+								<th><label>사용 날짜</label></th>
+								<td class="writerWidth"><p th:text="${detail.period}"></p></td>
+								<th><label>사용 시간</label></th>
+								<td class="dateWidth"><p th:text="${detail.start_time} + ' ~ ' + ${detail.end_time}"></p></td>
+							</tr>
+							<tr>
+								<th><label>목적</label></th>
+								<td colspan="3"><p th:text="${detail.purpose}"></p></td>
+							</tr>
+							<tr height="200">
+								<th><label>추가 내용</label></th>
+								<td colspan="3"><p th:text="${detail.content}"></p></td>
+							</tr>
+						</tbody>
+					</table>
+					<br/>
+					<div style="text-align: right;">
+						<input class="button" type="submit" th:value="승인" th:formaction="@{/agree/{no}(no=${detail.id})}">
+						<input class="button" type="submit" th:value="거절" th:formaction="@{/reject/{no}(no=${detail.id})}">
+					</div>
+				</form>
+			</div>
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

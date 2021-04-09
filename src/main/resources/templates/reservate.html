@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>reservate</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/reservate.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="${header}"></div>
+		</div>
+		<br/><br/>
+	
+		<div class="container">
+			<div>
+				<form role="form" th:object=${reservationVO} th:action="@{/reservateProc}"
+					method="post" enctype="multipart/form-data">
+					<input type="hidden" id="user_id" name="user_id" th:value="${user.id}">
+					<div>
+						<label for="name">예약자 이름</label>
+						<input type="text" id="name" th:value="${user.name}" readonly>
+					</div>
+					<div>
+						<label for="email">E-mail</label>
+						<input type="text" id="email" th:value="${user.email}" readonly>
+					</div>
+					<div>
+						<label for="contact">연락처</label>
+						<input th:if="${user.contact} == null" type="text" th:field="*{user_contact}" id="user_contact" name="user_contact"
+							placeholder="예) 010-1234-1234" required="required">
+						<input th:if="${user.contact} != null" type="text" id="contact" th:value="${user.contact}" readonly>
+					</div>
+					<div>
+						<label for="major_id">전공</label>
+						<select th:if="${user.major_id} == 0" id="major" name="major_id">
+							<option value="선택"> --------- 전공 선택 --------- </option>
+							<option th:each="data : ${majorList}"
+									th:value="${data.id}"
+									th:text="${data.name}"></option>
+						</select>
+						<input th:if="${user.major_id} > 0" type="text" id="major_name" th:value="${majorName}" readonly>
+					</div>
+					<div>
+						<label for="room_id">강의실</label>
+						<select id="room" name="room_id">
+							<option value="선택"> --------- 강의실 선택 --------- </option>
+							<option th:each="room : ${roomList}"
+									th:value="${room.id}"
+									th:text="'뉴턴홀 ' + ${room.room_number} + '호'"></option>
+						</select>
+					</div>
+					<div>
+						<label for="period">기간</label>
+						<input type="date" name="period" id="period">
+					</div>
+					<div class="in">
+						<label for="start_time">시작 시간</label>
+						<input type="time" name="start_time" id="start_time">
+					</div>
+					<div class="in">
+						<label for="end_time">종료 시간</label>
+						<input type="time" name="end_time" id="end_time">
+					</div>
+					<div>
+						<label for="purpose">목적</label>
+						<input type="text" th:field="*{purpose}" id="purpose" name="purpose"
+							placeholder="목적을 입력하세요" required="required">
+					</div>
+					<div>
+						<label for="content">추가 내용</label>
+						<textarea type="text" th:field="*{content}" id="content" name="content" 
+							placeholder="예상 인원, 구체적인 활동 내용 등" required="required"></textarea>
+					</div>
+					<div style="text-align: right;">
+						<input class="button" type="submit" th:value="작성">
+					</div>
+				</form>
+			</div>
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

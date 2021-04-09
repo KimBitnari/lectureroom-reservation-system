@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTOMapper3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.UserMapper">
+
+	<insert id="createUserinfo" parameterType="com.example.demo.bean.UserVO" keyProperty="id">
+		INSERT INTO user(name, email, contact, major_id, provider_id)
+		VALUES(#{name}, #{email}, #{contact}, #{major_id}, #{provider_id})
+	</insert>
+	
+	<select id="readUserByEmail" resultType="com.example.demo.bean.UserVO" parameterType="String">
+		SELECT *
+		FROM user
+		WHERE email = #{email}
+	</select>
+	<select id="readIsAdminByUserID" resultType="int" parameterType="int">
+		SELECT isAdmin
+		FROM user
+		WHERE id = #{id}
+	</select>
+	<select id="readUserById" resultType="com.example.demo.bean.UserVO" parameterType="int">
+		SELECT *
+		FROM user
+		WHERE id = #{id}
+	</select>
+	<select id="readUserList" resultType="com.example.demo.bean.UserVO">
+		SELECT *
+		FROM user
+		ORDER BY id
+	</select>
+	
+	<update id="updateContAndMajor" parameterType="com.example.demo.bean.ReservationVO" keyProperty="id">
+		UPDATE user 
+		SET contact=#{user_contact}, major_id=#{major_id}
+		WHERE id=#{User_id}
+	</update>
+	<update id="updateContact" parameterType="com.example.demo.bean.ReservationVO" keyProperty="id">
+		UPDATE user 
+		SET contact=#{user_contact}
+		WHERE id=#{User_id}
+	</update>
+	<update id="updateMajor" parameterType="com.example.demo.bean.ReservationVO" keyProperty="id">
+		UPDATE user 
+		SET major_id=#{major_id}
+		WHERE id=#{User_id}
+	</update>
+	<update id="updateUser" parameterType="com.example.demo.bean.UserVO" keyProperty="id">
+		UPDATE user 
+		SET contact=#{contact}, major_id=#{major_id}
+		WHERE id=#{id}
+	</update>
+	<update id="updateUserRole" parameterType="com.example.demo.bean.UserVO">
+		UPDATE user 
+		SET role=#{role}
+		WHERE id=#{id}
+	</update>
+</mapper>

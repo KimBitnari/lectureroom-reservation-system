@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>list</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/list.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="${header}"></div>
+		</div>
+		<br/>
+		
+		<div class="container">			
+			<br/><br/>
+			
+			<!-- 타임리프 관련 태그에 내용이 없어도 무조건 에러  -->
+			
+			<div>
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th>No.</th>
+							<th>강의실</th>
+							<th>예약자</th>
+							<th>사용목적</th>
+							<th>사용날짜</th>
+							<th>사용시간</th>
+							<th>예약상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${reservationList}" class="detailHover">
+							<td th:text="${num.count}"></td>
+							<td th:text="'뉴턴홀 ' + ${data.room_name} + '호'"></td>
+							<td th:text="${data.user_name}"></td>
+							<td class="over" th:text="${data.purpose}"></td>
+							<td th:text="${data.period}"></td>
+							<td th:text="${data.start_time} + ' ~ ' + ${data.end_time}"></td>
+							<td th:if="${data.status} == 0"><div class="orange statusBox" th:text="${data.state}"></div></td>
+							<td th:if="${data.status} == 1"><div class="green statusBox" th:text="${data.state}"></div></td>
+							<td th:if="${data.status} == -1"><div class="red statusBox" th:text="${data.state}"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

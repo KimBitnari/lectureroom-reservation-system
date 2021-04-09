@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>home</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/home.css}" rel="stylesheet" />
+		<script src="/js/home.js" defer></script>
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="${header}"></div>
+		</div>
+		<br/><br/>
+		
+		<div class="container">	
+			<div class="green box center" th:onclick="'javascript:agreeReservation();'">
+				<p>승인된 예약</p>
+				<span class="center" th:text="${agree}"></span>
+			</div>
+			<div class="red box center" th:onclick="'javascript:rejectReservation();'">
+				<p>거절된 예약</p>
+				<span class="center" th:text="${reject}"></span>
+			</div>
+			<div class="orange box center" th:onclick="'javascript:waitingReservation();'">
+				<p>대기중인 예약</p>
+				<span class="center" th:text="${waiting}"></span>
+			</div>
+			<br/><br/>
+			
+			<div id="agreeReservation" style="display:none;">
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th class="w10">No.</th>
+							<th class="w17">강의실</th>
+							<th class="w27">사용목적</th>
+							<th class="w17">사용날짜</th>
+							<th class="w17">사용시간</th>
+							<th class="w12">예약상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${agreeReservationList}" class="detailHover">
+							<td class="w10" th:text="${num.count}"></td>
+							<td class="w17" th:text="'뉴턴홀 ' + ${data.room_name} + '호'"></td>
+							<td class="w27" th:text="${data.purpose}"></td>
+							<td class="w17" th:text="${data.period}"></td>
+							<td class="w17" th:text="${data.start_time} + ' ~ ' + ${data.end_time}"></td>
+							<td class="w12"><div class="green statusBox" th:text="${data.state}"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id="rejectReservation" style="display:none;">
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th class="w10">No.</th>
+							<th class="w17">강의실</th>
+							<!-- <th>예약자</th> -->
+							<th class="w27">사용목적</th>
+							<th class="w17">사용날짜</th>
+							<th class="w17">사용시간</th>
+							<th class="w12">예약상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${rejectReservationList}" class="detailHover">
+							<td class="w10" th:text="${num.count}"></td>
+							<td class="w17" th:text="'뉴턴홀 ' + ${data.room_name} + '호'"></td>
+							<td class="w27" th:text="${data.purpose}"></td>
+							<td class="w17" th:text="${data.period}"></td>
+							<td class="w17" th:text="${data.start_time} + ' ~ ' + ${data.end_time}"></td>
+							<td class="w12"><div class="red statusBox" th:text="${data.state}"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			
+			<div id="waitingReservation" style="display:none;">
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th class="w10">No.</th>
+							<th class="w17">강의실</th>
+							<!-- <th>예약자</th> -->
+							<th class="w27">사용목적</th>
+							<th class="w17">사용날짜</th>
+							<th class="w17">사용시간</th>
+							<th class="w12">예약상태</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${waitingReservationList}" class="detailHover">
+							<td class="w10" th:text="${num.count}"></td>
+							<td class="w17" th:text="'뉴턴홀 ' + ${data.room_name} + '호'"></td>
+							<td class="w27" th:text="${data.purpose}"></td>
+							<td class="w17" th:text="${data.period}"></td>
+							<td class="w17" th:text="${data.start_time} + ' ~ ' + ${data.end_time}"></td>
+							<td class="w12"><div class="orange statusBox" th:text="${data.state}"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</body>
+</html>

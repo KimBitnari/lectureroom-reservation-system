@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>list</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/register.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="./inc/header"></div>
+		</div>
+		<br/>
+		
+		<div class="container">
+			<h3 class="center">초기 정보 등록</h3>
+			<br>
+			
+			<form role="form" th:object=${user} th:action="@{/registerUserinfo}" method="post">
+				<div>
+					<label for="name">이름</label>
+					<input type="text" id="name" name="name" th:value="${session.user_name}" readonly />
+				</div>
+				<div>
+					<label for="email">E-mail</label>
+					<input type="text" id="email" name="email" th:value="${session.user_email}" readonly />
+				</div>
+				<div>
+					<label for="contact">연락처</label>
+					<input type="text" th:field="*{contact}" id="contact" name="contact" placeholder="예) 010-1234-1234" required="required" />
+				</div>
+				<div>
+					<label for="major_id">전공</label>
+					<select id="major" name="major_id">
+						<option value="선택"> --------- 전공 선택 --------- </option>
+						<option th:each="data : ${majorList}"
+								th:value="${data.id}"
+								th:text="${data.name}"></option>
+					</select>
+				</div>
+				<div style="text-align: right;">
+					<input class="button" type="submit" th:value="완료">
+				</div>
+			</form>
+		</div>
+	</body>
+</html>

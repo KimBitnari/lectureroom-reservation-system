@@ -1,0 +1,25 @@
+#name, #email, #user_contact, #contact, #major_name, #purpose, #content {
+	width: 100%;
+	margin-bottom: 30px;
+	height: 35px;
+	background-color: rgba(100, 149, 237, 0.1);
+	border: none;
+	padding: 10px;
+}
+
+.in {
+	display: inline-block;
+	width: 47%;
+}
+
+#major, #room, #period, #start_time, #end_time {
+	display: block;
+	width: 40%;
+	margin-bottom: 30px;
+	height: 35px;
+	background-color: rgba(100, 149, 237, 0.1);
+	border: none;
+	padding: 10px;
+}
+
+

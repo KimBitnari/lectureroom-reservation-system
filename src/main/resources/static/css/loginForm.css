@@ -1,0 +1,39 @@
+h1 {
+	text-align: center;
+	border-bottom: 3px solid #f0f0f0;
+	padding: 20px;
+	width: 50%;
+	margin: auto;
+}
+
+img {
+	width: 60px;
+	margin: 0 5% 2% 2%;
+	vertical-align: middle;
+}
+
+.link {
+	display: block;
+	width: 40%;
+	margin: auto;
+	margin-top: 5%;
+	border-radius: 50px;
+	text-decoration: none;
+	color: white;
+}
+
+h2 {
+	display: inline-block;
+}
+
+.google {
+	background-color: #f4511e;
+}
+
+.faceb {
+	background-color: #295297;
+}
+
+.naver {
+	background-color: #00c73c;
+}

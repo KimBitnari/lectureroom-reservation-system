@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper 
+	PUBLIC "-//mybatis.org//DTOMapper3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.mapper.ReservationMapper">
+
+	<insert id="createReservation" parameterType="com.example.demo.bean.ReservationVO" keyProperty="id">
+		INSERT INTO reservation(user_id, room_id, period, start_time, end_time, purpose, content)
+		VALUES(#{user_id}, #{room_id}, #{period}, #{start_time}, #{end_time}, #{purpose}, #{content})
+	</insert>
+	
+	<select id="readReservationList" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		ORDER BY id
+	</select>
+	<select id="readReservationListById" parameterType="int" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		WHERE user_id=#{id}
+		ORDER BY id
+	</select>
+	<select id="readReservationDetail" parameterType="int" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		WHERE id=#{no}
+	</select>
+	<select id="readAgreeReservationListById" parameterType="int" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		WHERE status = 1 AND user_id=#{id}
+		ORDER BY id
+	</select>
+	<select id="readRejectReservationListById" parameterType="int" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		WHERE status = -1 AND user_id=#{id}
+		ORDER BY id
+	</select>
+	<select id="readWaitingReservationListById" parameterType="int" resultType="com.example.demo.bean.ReservationVO">
+		SELECT * 
+		FROM reservation
+		WHERE status = 0 AND user_id=#{id}
+		ORDER BY id
+	</select>
+	
+	<update id="updateAgreeReservation" parameterType="int" keyProperty="id">
+		UPDATE reservation 
+		SET status = 1
+		WHERE id=#{no}
+	</update>
+	<update id="updateRejectReservation" parameterType="int" keyProperty="id">
+		UPDATE reservation 
+		SET status = -1
+		WHERE id=#{no}
+	</update>
+</mapper>

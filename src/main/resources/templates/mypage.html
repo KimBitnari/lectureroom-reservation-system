@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>mypage</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/mypage.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="${header}"></div>
+		</div>
+		<br/><br/>
+	
+		<div class="container">
+			<div>
+				<h1>내 등록 정보</h1>
+				<br/>
+				<form role="form" th:object=${userVO} th:action="@{/mypage}" method="post">
+					<div>
+						<label for="name">이름</label>
+						<input type="text" id="name" th:value="${user.name}" readonly>
+					</div>
+					<div>
+						<label for="email">E-mail</label>
+						<input type="text" id="email" th:value="${user.email}" readonly>
+					</div>
+					<div>
+						<label for="contact">연락처</label>
+						<input th:if="${user.contact} == null" type="text" id="user_contact" placeholder="초기정보 없음" readonly>
+						<input th:if="${user.contact} != null" type="text" id="contact" th:value="${user.contact}" readonly>
+					</div>
+					<div>
+						<label for="major">전공</label>
+						<input th:if="${user.major_id} == 0" type="text" id="major" placeholder="초기정보 없음" readonly>
+						<input th:if="${user.major_id} > 0" type="text" id="major_name" th:value="${majorName}" readonly>
+					</div>
+					<br/>
+					<div style="text-align: right;">
+						<input class="button" type="submit" th:value="수정" th:formaction="@{/update/{id}(id=${user.id})}">
+					</div>
+				</form>
+			</div>
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

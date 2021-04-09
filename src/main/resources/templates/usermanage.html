@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>usermanage</title>
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/usermanage.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="./inc/adminHeader"></div>
+		</div>
+		<br/>
+		
+		<div class="container">			
+			<br/><br/>
+			
+			<!-- 타임리프 관련 태그에 내용이 없어도 무조건 에러  -->
+			
+			<div>
+			<form role="form" th:object=${userVO} th:action="@{/upradeProc}" method="post">
+				<table>
+					<thead>
+						<tr class="tableHeader">
+							<th>No.</th>
+							<th>이름</th>
+							<th>이메일</th>
+							<th>Provider</th>
+							<th>권한</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="data, num : ${userList}">
+							<td th:text="${num.count}"></td>
+							<td th:text="${data.name}"></td>
+							<td th:text="${data.email}"></td>
+							<td th:text="${data.provider}"></td>
+							<td> <!--  th:text="${data.role}" class="detailHover" -->
+								<select th:if="${data.role} == '관리자'" id="role" name="role">
+									<option th:value="1" th:text="관리자" selected></option>
+									<option th:value="0" th:text="사용자"></option>
+								</select>
+								<select th:if="${data.role} == '사용자'" id="role" name="role">
+									<option th:value="1" th:text="관리자"></option>
+									<option th:value="0" th:text="사용자" selected></option>
+								</select>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<br/>
+				<div style="text-align: right;">
+					<input class="button" type="submit" th:value="저장">
+				</div>
+			</form>
+			</div>
+			
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

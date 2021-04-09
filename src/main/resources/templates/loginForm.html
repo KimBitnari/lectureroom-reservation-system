@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<title>home</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/loginForm.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head" id="header">
+		
+			<div th:replace="./inc/loginHeader"></div>
+		</div>
+		<br/><br/>
+		
+		<div class="container">
+			<h1>소셜 로그인</h1>
+			
+			<a href="/oauth2/authorization/google" class="link google">
+				<img th:src="@{/img/google.png}"/>
+				<h2>구글 로그인</h2>
+			</a>
+			<a href="/oauth2/authorization/facebook" class="link faceb">
+				<img th:src="@{/img/facebook.png}"/>
+				<h2>페이스북 로그인</h2>
+			</a>
+			<a href="/oauth2/authorization/naver" class="link naver">
+				<img th:src="@{/img/naver.png}"/>
+				<h2>네이버 로그인</h2>
+			</a>
+		</div>
+	</body>
+</html>
+		

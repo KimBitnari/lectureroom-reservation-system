@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmls:th="http://www.thymeleaf.org">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<title>mypage-update</title>	
+		
+		<link th:href="@{/css/common.css}" rel="stylesheet" />
+		<link th:href="@{/css/update.css}" rel="stylesheet" />
+	</head>
+	
+	<body>
+		<div class="head">
+			<div th:replace="${header}"></div>
+		</div>
+		<br/><br/>
+	
+		<div class="container">
+			<div>
+				<h1>내 등록 정보 수정</h1>
+				<br/>
+				<form role="form" th:object=${userVO} th:action="@{/updateProc}" method="post">
+					<input type="hidden" name="id" th:value="${user.id}">
+					<div>
+						<label for="name">이름</label>
+						<input type="text" id="name" th:value="${user.name}" readonly>
+					</div>
+					<div>
+						<label for="email">E-mail</label>
+						<input type="text" id="email" th:value="${user.email}" readonly>
+					</div>
+					<div>
+						<label for="contact">연락처</label>
+						<input type="text" id="contact" name="contact" placeholder="예) 010-1234-1234" th:value="${user.contact}" required="required">
+					</div>
+					<div>
+						<label for="major_id">전공</label>
+						<select id="major" name="major_id">
+							<option value="선택"> --------- 전공 선택 --------- </option>
+							<option th:if="${user} != null" th:each="data : ${majorList}"
+									th:value="${data.id}"
+									th:text="${data.name}" th:selected="${user.major_id == data.id}"></option>
+							<option></option>
+						</select>
+						<!-- th:if="${user.major_id} == 0"  -->
+						<!-- <input th:if="${user.major_id} > 0" type="text" id="major_name" th:value="${majorName}" readonly> -->
+					</div>
+					<br/>
+					<div style="text-align: right;">
+						<input class="button" type="submit" th:value="저장">
+					</div>
+				</form>
+			</div>
+			<br/><br/><br/>
+		</div>
+	</body>
+</html>

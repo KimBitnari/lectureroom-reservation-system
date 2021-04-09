@@ -1,0 +1,22 @@
+.center {
+	text-align: center;
+}
+
+#name, #email, #contact {
+	width: 100%;
+	margin-bottom: 30px;
+	height: 35px;
+	background-color: rgba(100, 149, 237, 0.1);
+	border: none;
+	padding: 10px;
+}
+
+#major {
+	display: block;
+	width: 40%;
+	margin-bottom: 30px;
+	height: 35px;
+	background-color: rgba(100, 149, 237, 0.1);
+	border: none;
+	padding: 10px;
+}
